@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head style="background-color: aqua">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../index.css" />
+    <div class="headerr">
+      <a href="\home" class="logo">Car Price Predictor</a>
+      <div class="headerr-right">
+        <a href="\home">Home</a>
+        <a href="http://127.0.0.1:5000/static/Selltrade/index.html">Shop</a>
+        <a href="static\Liked\indexLiked.html">Liked</a>
+        <a class="active" href="http://127.0.0.1:5000/static/Data/data.html"
+          >ALL Cars</a
+        >
+        <a href="http://127.0.0.1:5000/static/Details/index.html">Details</a>
+      </div>
+    </div>
+    <h1 style="text-align-last: center; color: #3281a8; padding: 4px">
+      Available automobiles in market please check for best price
+    </h1>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+      }
+
+      /*---------- BODY ----------*/
+      body {
+        border-radius: 15px;
+      }
+
+      /*---------- TABLES ----------*/
+      /*----- basics -----*/
+      table {
+        border-collapse: collapse;
+        border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+
+        max-width: 2000px;
+        width: 100%;
+
+        margin: 10px auto 20px auto;
+      }
+
+      /*----- table headings -----*/
+      th {
+        background-color: #aecbeb;
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+        font-size: 18px;
+      }
+
+      /*----- table data (a cell) -----*/
+      td {
+        padding: 8px;
+        border-bottom: 1px solid black;
+        border: 1px solid rgb(0, 0, 0, 0.2);
+      }
+
+      /*----- table row hover animation -----*/
+      tr {
+        transition: background-color 0.5s;
+      }
+      tr:hover {
+        background-color: #e8e8e8;
+      }
+
+      td {
+        transition: background-color 0.4s;
+      }
+      td:hover {
+        background-color: lightgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="d3.min.js?v=3.2.8"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      d3.text("dataset.csv", function (data) {
+        var parsedCSV = d3.csv.parseRows(data);
+
+        var container = d3
+          .select("body")
+          .append("table")
+
+          .selectAll("tr")
+          .data(parsedCSV)
+          .enter()
+          .append("tr")
+
+          .selectAll("td")
+          .data(function (d) {
+            return d;
+          })
+          .enter()
+          .append("td")
+          .text(function (d) {
+            return d;
+          });
+      });
+    </script>
+  </body>
+</html>
